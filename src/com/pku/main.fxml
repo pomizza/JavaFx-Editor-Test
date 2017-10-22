@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.pku.Controller">
+  <children>
+    <ToolBar prefHeight="33.0" prefWidth="1024.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <Button mnemonicParsing="false" onMouseClicked="#newProject" text="新项目" />
+        <Button mnemonicParsing="false" onMouseClicked="#viewInBrowser" text="资源管理器" />
+        <Button mnemonicParsing="false" text="编译" />
+        <Button defaultButton="true" onMouseClicked="#runProgram" mnemonicParsing="false" text="运行" />
+      </items>
+    </ToolBar>
+    <SplitPane dividerPositions="0.30039138943248533" prefHeight="607.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <children>
+            <TreeView id="treeview_dir_1" fx:id="tv_dir_1" prefHeight="607.0" prefWidth="235.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="353.0" prefWidth="332.0">
+          <children>
+            <TabPane  fx:id="tabPane"  prefHeight="607.0" prefWidth="557.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <Tab fx:id="previewTab" text="预览">
+                <AnchorPane >
+                  <children>
+                    <TextArea fx:id="preview" prefWidth="200.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  </children>
+                </AnchorPane>
+              </Tab>
+              <Tab text="测试页">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </Tab>
+            </TabPane>
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>
