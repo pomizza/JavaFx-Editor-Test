@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.PickResult;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.scene.web.HTMLEditor;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,6 +52,9 @@ public class Controller  implements Initializable {
     @FXML
     private Tab previewTab;
 
+    @FXML
+    private HTMLEditor previewHTML;
+
     //根节点
     TreeItem<FileItem> rootNode;
 
@@ -78,11 +82,7 @@ public class Controller  implements Initializable {
 
     @FXML public void runProgram(){
         Thread thread = null;
-        try {
-            thread = new Thread(new RunProgram(currentPreview.getCanonicalPath()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        thread = new Thread(new RunProgram(Main.openDir));
         thread.start();
     }
 
@@ -123,9 +123,12 @@ public class Controller  implements Initializable {
                         currentPreview = fileItem.getFile();
                         previewTab.setText("预览-"+currentPreview.getName());
                         if(currentPreview.length()<100000){
-                            preview.setText(ReadFromFile.readToString(currentPreview.getPath()));
+                            String content = ReadFromFile.readToString(currentPreview.getPath());
+                            preview.setText(content);
+                            previewHTML.setHtmlText(content);
                         }else{
                             preview.setText("文本过长");
+                            previewHTML.setHtmlText("文本过长");
                         }
                     }
                 }

@@ -12,10 +12,9 @@ public class RunProgram implements Runnable{
     @Override
     public void run() {
         try {
-            Runtime.getRuntime().exec("cd "+path);
-            Runtime.getRuntime().exec("gradle -q run");
+            Runtime.getRuntime().exec("D:\\Program Files\\gradle-4.3-rc-1\\bin\\gradle -q run "+path);
         } catch (IOException e) {
-            System.out.println("命令运行出错");
+            System.out.println("命令运行出错 path"+path);
             e.printStackTrace();
         }
     }

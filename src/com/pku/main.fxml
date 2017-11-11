@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.pku.Controller">
   <children>
@@ -13,7 +14,8 @@
         <Button mnemonicParsing="false" onMouseClicked="#newProject" text="新项目" />
         <Button mnemonicParsing="false" onMouseClicked="#viewInBrowser" text="资源管理器" />
         <Button mnemonicParsing="false" text="编译" />
-        <Button defaultButton="true" onMouseClicked="#runProgram" mnemonicParsing="false" text="运行" />
+        <Button defaultButton="true" mnemonicParsing="false" onMouseClicked="#runProgram" text="运行" />
+        <CheckBox mnemonicParsing="false" text="自动保存" />
       </items>
     </ToolBar>
     <SplitPane dividerPositions="0.30039138943248533" prefHeight="607.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
@@ -25,16 +27,20 @@
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="353.0" prefWidth="332.0">
           <children>
-            <TabPane  fx:id="tabPane"  prefHeight="607.0" prefWidth="557.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane fx:id="tabPane" prefHeight="607.0" prefWidth="557.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <Tab fx:id="previewTab" text="预览">
-                <AnchorPane >
+                <AnchorPane>
                   <children>
                     <TextArea fx:id="preview" prefWidth="200.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   </children>
                 </AnchorPane>
               </Tab>
               <Tab text="测试页">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                    <HTMLEditor fx:id="previewHTML" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="200.0" prefWidth="506.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  </children>
+                </AnchorPane>
               </Tab>
             </TabPane>
           </children>
