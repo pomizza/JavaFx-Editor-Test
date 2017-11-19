@@ -1,6 +1,7 @@
 package com.pku;
 import com.pku.concurrency.RunProgram;
 import com.pku.model.FileItem;
+import com.pku.utils.GradleTools;
 import com.pku.utils.ReadFromFile;
 import com.sun.javafx.scene.control.skin.TreeViewSkin;
 import javafx.collections.FXCollections;
@@ -78,12 +79,17 @@ public class Controller  implements Initializable {
         stack.push(rootNode);
         getDirectory(file);
         tv_dir_1.setRoot(rootNode);
+        Main.openDir = file.getPath();
     }
 
     @FXML public void runProgram(){
         Thread thread = null;
         thread = new Thread(new RunProgram(Main.openDir));
         thread.start();
+    }
+
+    @FXML public void buildProgram(){
+        GradleTools.getInstance("D:\\Program Files\\gradle-4.3-rc-1").compileJava(Main.openDir,null);
     }
 
     /**
@@ -113,24 +119,28 @@ public class Controller  implements Initializable {
         tv_dir_1.setRoot(rootNode);
         tv_dir_1.addEventHandler(MouseEvent.MOUSE_PRESSED,new EventHandler<MouseEvent>() {
             public void handle(MouseEvent me) {
-                //监听树形控件的鼠标事件与键盘事件
-                TreeView<FileItem> treeView= (TreeView)me.getSource();
-                FileItem fileItem = treeView.getSelectionModel().getSelectedItems().get(0).getValue();
+                try{
+                    //监听树形控件的鼠标事件与键盘事件
+                    TreeView<FileItem> treeView= (TreeView)me.getSource();
+                    FileItem fileItem = treeView.getSelectionModel().getSelectedItems().get(0).getValue();
 
-                if(currentPreview==null||!currentPreview.equals(fileItem.getFile())){
-                    File select = fileItem.getFile();
-                    if(!select.isDirectory()){
-                        currentPreview = fileItem.getFile();
-                        previewTab.setText("预览-"+currentPreview.getName());
-                        if(currentPreview.length()<100000){
-                            String content = ReadFromFile.readToString(currentPreview.getPath());
-                            preview.setText(content);
-                            previewHTML.setHtmlText(content);
-                        }else{
-                            preview.setText("文本过长");
-                            previewHTML.setHtmlText("文本过长");
+                    if(currentPreview==null||!currentPreview.equals(fileItem.getFile())){
+                        File select = fileItem.getFile();
+                        if(!select.isDirectory()){
+                            currentPreview = fileItem.getFile();
+                            previewTab.setText("预览-"+currentPreview.getName());
+                            if(currentPreview.length()<100000){
+                                String content = ReadFromFile.readToString(currentPreview.getPath());
+                                preview.setText(content);
+                                previewHTML.setHtmlText(content);
+                            }else{
+                                preview.setText("文本过长");
+                                previewHTML.setHtmlText("文本过长");
+                            }
                         }
                     }
+                }catch (Exception e){
+
                 }
             }
         });

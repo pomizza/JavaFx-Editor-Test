@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 public final class GradleTools {  
       
     /** 日志 */  
-    private static final Logger LOGGER = LoggerFactory.getLogger(GradleTools.class);  
+    private static final Logger LOGGER = LoggerFactory.getLogger(GradleTools.class);
       
     /** Gradle工具实例 */  
     private static GradleTools instance;  
@@ -111,6 +111,7 @@ public final class GradleTools {
      * @return 执行结果 
      */  
     public String compileJava(String rootProjectDir, String subProjectName) {
+        System.out.println("开始尝试编译");
         return execute(rootProjectDir, subProjectName, "classes", "testClasses");  
     }  
       
@@ -135,13 +136,16 @@ public final class GradleTools {
      */  
     public String execute(String rootProjectDir, String subProjectName, String... tasks) {
         if (StringUtils.isBlank(rootProjectDir)) {
+            System.out.println("根项目所在的目录不能为空!");
             throw new IllegalArgumentException("根项目所在的目录不能为空!");  
         }  
         final File root = new File(rootProjectDir);  
-        if (!root.exists()) {  
+        if (!root.exists()) {
+            System.out.println("根项目所在的目录不存在!");
             throw new IllegalArgumentException("根项目所在的目录不存在!");  
         }  
-        if (tasks == null) {  
+        if (tasks == null) {
+            System.out.println("没有可执行的任务!");
             throw new IllegalArgumentException("没有可执行的任务!");  
         }  
         final List<String> arguments = new ArrayList<String>(1);  
@@ -168,7 +172,8 @@ public final class GradleTools {
         try {  
             while (!future.isDone()) {  
                 // 等待结果  
-            }  
+            }
+            System.out.println(rootProjectDir+":执行"+Arrays.toString(tasks)+"完成");
             LOGGER.info("{}::执行【{}】完成。", rootProjectDir, Arrays.toString(tasks));  
             return future.get();  
         } catch (Exception e) {  
@@ -224,7 +229,8 @@ public final class GradleTools {
                 }  
             });  
             latch.await();  
-        } catch (InterruptedException e) {  
+        } catch (InterruptedException e) {
+            System.out.println("执行Gradle命令出错:" + e.getMessage());
             LOGGER.error("执行Gradle命令出错:" + e.getMessage(), e);  
         } finally {  
             connection.close();  

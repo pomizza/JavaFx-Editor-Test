@@ -13,7 +13,7 @@
       <items>
         <Button mnemonicParsing="false" onMouseClicked="#newProject" text="新项目" />
         <Button mnemonicParsing="false" onMouseClicked="#viewInBrowser" text="资源管理器" />
-        <Button mnemonicParsing="false" text="编译" />
+        <Button mnemonicParsing="false"  onMouseClicked="#buildProgram"  text="编译" />
         <Button defaultButton="true" mnemonicParsing="false" onMouseClicked="#runProgram" text="运行" />
         <CheckBox mnemonicParsing="false" text="自动保存" />
       </items>
